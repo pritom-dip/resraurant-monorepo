@@ -4,6 +4,7 @@ const app = express();
 require("dotenv").config();
 const cors = require("cors");
 const categoryRouter = require("./routes/category.routes");
+const userRoutes = require("./routes/user.routes");
 
 // Middlewares
 app.use(express.json());
@@ -14,6 +15,7 @@ mongoose
   .then(() => console.log("db connected"));
 
 app.use("/api/v1/category", categoryRouter);
+app.use("/api/v1/user", userRoutes);
 
 const port = process.env.PORT || 3300;
 

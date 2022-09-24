@@ -14,7 +14,7 @@ class CategoryController {
     } catch (err) {
       return res.status(400).json({
         success: false,
-        err: err.message,
+        err: err,
       });
     }
   }
@@ -22,11 +22,11 @@ class CategoryController {
   async createCategory(req, res) {
     try {
       const category = await createCategoryService(req.body);
-      return res.status(200).json({ success: true, data: category });
+      return res.status(201).json({ success: true, data: category });
     } catch (err) {
       return res.status(400).json({
         success: false,
-        err: err.message,
+        err: err,
       });
     }
   }
@@ -47,7 +47,7 @@ class CategoryController {
     } catch (err) {
       return res.status(400).json({
         success: false,
-        err: err.message,
+        err: err,
       });
     }
   }

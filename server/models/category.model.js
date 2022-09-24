@@ -9,6 +9,7 @@ const cagegorySchema = mongoose.Schema(
       lowercase: true,
       unique: [true, "Name must be unique"],
       maxLength: 100,
+      trim: true,
     },
     description: String,
     image: {
