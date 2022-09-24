@@ -1,10 +1,12 @@
 const express = require("express");
 const categoryController = require("../controllers/category.controller");
+const userController = require("../controllers/user.controller");
+
 const categoryRouter = express.Router();
 
 categoryRouter
   .route("/")
-  .get(categoryController.getAllCategories)
+  .get(userController.protect, categoryController.getAllCategories)
   .post(categoryController.createCategory);
 
 categoryRouter
