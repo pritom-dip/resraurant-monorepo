@@ -5,6 +5,7 @@ require("dotenv").config();
 const cors = require("cors");
 const categoryRouter = require("./routes/category.routes");
 const userRoutes = require("./routes/user.routes");
+const foodRoutes = require("./routes/food.routes");
 
 // Middlewares
 app.use(express.json());
@@ -16,6 +17,7 @@ mongoose
 
 app.use("/api/v1/category", categoryRouter);
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/food", foodRoutes);
 
 const port = process.env.PORT || 3300;
 
