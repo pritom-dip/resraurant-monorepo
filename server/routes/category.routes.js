@@ -1,12 +1,12 @@
 const express = require("express");
 const categoryController = require("../controllers/category.controller");
-const userController = require("../controllers/user.controller");
+const checkAuth = require("../middlewares/authentication");
 
 const categoryRouter = express.Router();
 
 categoryRouter
   .route("/")
-  .get(userController.protect, categoryController.getAllCategories)
+  .get(categoryController.getAllCategories)
   .post(categoryController.createCategory);
 
 categoryRouter
