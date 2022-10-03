@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 import {
   useAddCategoryMutation,
   useGetCategoriesQuery,
@@ -9,12 +9,14 @@ export default function Home() {
   const { data, isError, isLoading, isSuccess } = useGetCategoriesQuery();
   const [addCategory] = useAddCategoryMutation();
 
+  const [name, setName] = useState("");
+
   if (isLoading) return <div>Loading</div>;
   if (isError) return <div>Error</div>;
 
   const handleClick = async () => {
     await addCategory({
-      name: "category two",
+      name,
     });
   };
 
@@ -36,7 +38,12 @@ export default function Home() {
         ))}
 
       <hr />
-
+      <input
+        type="text"
+        name="name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
       <button onClick={handleClick}>Send post req</button>
     </div>
   );
