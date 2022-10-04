@@ -18,7 +18,7 @@ const updateCategoryService = async (id, data) => {
 };
 
 const deleteCategoryService = async (id) => {
-  return await Category.deleteOne({ _id: id });
+  return await Category.deleteOne({ _id });
 };
 
 module.exports = {

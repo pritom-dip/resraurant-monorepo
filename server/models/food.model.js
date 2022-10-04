@@ -59,8 +59,6 @@ const foodSchema = mongoose.Schema(
   }
 );
 
-// categories: [{ name: String, id: { type: ObjectId, ref: "Category" } }],
-
 const Food = mongoose.model("Food", foodSchema);
 
 module.exports = Food;

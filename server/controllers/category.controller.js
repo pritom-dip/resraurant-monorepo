@@ -69,6 +69,7 @@ exports.updateCategory = async (req, res) => {
 
     return res.status(200).json({
       status: true,
+      data: req?.body,
     });
   } catch (err) {
     return res.status(400).json({

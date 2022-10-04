@@ -3,13 +3,17 @@ import React, { useState } from "react";
 import {
   useAddCategoryMutation,
   useGetCategoriesQuery,
+  useUpdateCategoryMutation,
 } from "../lib/features/category/categoryApi";
 
 export default function Home() {
   const { data, isError, isLoading, isSuccess } = useGetCategoriesQuery();
   const [addCategory] = useAddCategoryMutation();
+  const [updateCategory] = useUpdateCategoryMutation();
 
   const [name, setName] = useState("");
+  const [updateName, setUpdateName] = useState("");
+  const [editButton, setEditButton] = useState("");
 
   if (isLoading) return <div>Loading</div>;
   if (isError) return <div>Error</div>;
@@ -20,7 +24,14 @@ export default function Home() {
     });
   };
 
-  console.log(data?.data);
+  const handleUpdate = async (id) => {
+    await updateCategory({
+      id,
+      data: {
+        name: updateName,
+      },
+    });
+  };
 
   return (
     <div>
@@ -34,7 +45,33 @@ export default function Home() {
 
       {data?.data?.length > 0 &&
         data?.data?.map((singleData) => (
-          <div key={singleData?._id}>{singleData?.name}</div>
+          <div
+            key={singleData?._id}
+            style={{ display: "flex", gap: "20px", marginBottom: "20px" }}
+          >
+            <div>{singleData?.name}</div>
+            <button
+              onClick={() => {
+                setUpdateName(singleData?.name);
+                setEditButton(singleData?._id);
+              }}
+            >
+              Edit
+            </button>
+            {editButton == singleData?._id && (
+              <>
+                <input
+                  type="text"
+                  name="name"
+                  value={updateName}
+                  onChange={(e) => setUpdateName(e.target.value)}
+                />
+                <button onClick={() => handleUpdate(singleData?._id)}>
+                  Click
+                </button>
+              </>
+            )}
+          </div>
         ))}
 
       <hr />
